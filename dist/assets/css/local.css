@@ -1,0 +1,22 @@
+.LeftNav-title {
+  color:
+    #fff;
+  display: block;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: .7em .75em .5em;
+  text-transform: uppercase;
+}
+
+a, a:link, a:visited {
+    color: black;
+    text-decoration: none;
+}
+.pointer {
+    color:#213F8C;
+}
+
+a#statement_project{
+  color:#213F8C;
+}

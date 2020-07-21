@@ -1,0 +1,17 @@
+<p class="h3">
+  <small>{{moment-format @newsItem.field_date_to_be_published "ll"}}</small>
+  <br>
+  <a href="newsrelease/detail.cfm?RecordID=71664">
+    <b>{{@newsItem.title}}</b>
+  </a>
+</p>
+
+<p></p>
+
+<p>
+  {{#if @trimItemBody}}
+    {{html-safe (trim-string @newsItem.body 300)}}...
+  {{else}}
+    {{html-safe @newsItem.body}}
+  {{/if}}
+</p>

@@ -1,0 +1,12 @@
+<div
+  {{did-insert (fn this.loader @modelName @queryParams @archiveYear)}}
+  {{did-update (fn this.loader @modelName @queryParams @archiveYear)}}
+></div>
+<News::List
+  @newsItems={{this.newsItems}}
+  @filters={{@queryParams}}
+  @trimItemBody={{true}}
+  @modelName={{@modelName}}
+  @setArchiveYear={{@setArchiveYear}}
+  @archiveYear={{@archiveYear}}
+/>

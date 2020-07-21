@@ -1,0 +1,58 @@
+<div class="Main-nav">
+  <div class="LeftNav" role="navigation">
+    <span class="LeftNav-title">NEWS & MULTIMEDIA</span>
+    <ul class="LeftNav-list">
+      {{#each this.sideBarItems as |sideBarItem|}}
+        {{#let (string-contains sideBarItem.routeName this.router.currentRouteName) as |isRouteActive|}}
+          <li
+            class={{if isRouteActive "-active"}}
+          >
+            <LinkTo
+              @route={{sideBarItem.routeName}}
+            >
+              {{sideBarItem.label}}
+            </LinkTo>
+
+            {{#if isRouteActive}}
+              <ul>
+                {{#each sideBarItem.filters as |filter|}}
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      {{on "click" (fn this.setFilter 'filterBy' filter.propertyName)}}
+                    >
+                      Filter By {{filter.propertyName}}
+                    </a>
+
+                    {{#if (equal @queryParams.filterBy filter.propertyName)}}
+                      <ul>
+                        {{#each filter.subOptions as |subOption|}}
+                          <li>
+                            <a
+                              href="javascript:void(0)"
+                              {{on "click" (fn this.setFilter filter.propertyName subOption)}}
+                            >
+                              {{subOption}}
+                            </a>
+                          </li>
+                        {{/each}}
+                      </ul>
+                    {{/if}}
+                  </li>
+                {{/each}}
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    {{on "click" (fn this.goToArchives sideBarItem.routeName)}}
+                  >
+                    Archived {{sideBarItem.label}}
+                  </a>
+                </li>
+              </ul>
+            {{/if}}
+          </li>
+        {{/let}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
