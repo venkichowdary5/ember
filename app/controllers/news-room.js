@@ -8,14 +8,14 @@ export default class NewsRoomControler extends Controller {
     'year',
     'region',
     'state',
-    'topic',
+    'issue',
   ];
 
   @tracked filterBy = null;
   @tracked year = null;
   @tracked region = null;
   @tracked state = null;
-  @tracked topic = null;
+  @tracked issue = null;
 
   get queryParamValues() {
     let {
@@ -23,14 +23,14 @@ export default class NewsRoomControler extends Controller {
       year,
       region,
       state,
-      topic,
+      issue,
     } = this;
     return {
       filterBy,
       year,
       region,
       state,
-      topic,
+      issue,
     }
   }
 
@@ -41,32 +41,32 @@ export default class NewsRoomControler extends Controller {
         this.year = null;
         this.region = null;
         this.state = null;
-        this.topic = null;
+        this.issue = null;
         break;
       
       case 'year':
         this.year = queryParamValue;
         this.region = null;
         this.state = null;
-        this.topic = null;
+        this.issue = null;
         break;
       
       case 'region':
         this.region = queryParamValue;
         this.year = null;
         this.state = null;
-        this.topic = null;
+        this.issue = null;
         break;
 
       case 'state':
         this.state = queryParamValue;
         this.year = null;
         this.region = null;
-        this.topic = null;
+        this.issue = null;
         break;
 
-      case 'topic':
-        this.topic = queryParamValue;
+      case 'issue':
+        this.issue = queryParamValue;
         this.year = null;
         this.region = null;
         this.state = null;

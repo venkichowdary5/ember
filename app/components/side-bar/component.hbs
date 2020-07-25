@@ -21,7 +21,13 @@
                       href="javascript:void(0)"
                       {{on "click" (fn this.setFilter 'filterBy' filter.propertyName)}}
                     >
-                      Filter By {{filter.propertyName}}
+                      Filter By 
+                      {{#if (equal filter.propertyName 'issue')}}
+                          topic
+                      {{else}}
+                          {{filter.propertyName}}
+                      {{/if}}
+
                     </a>
 
                     {{#if (equal @queryParams.filterBy filter.propertyName)}}

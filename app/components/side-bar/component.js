@@ -50,7 +50,7 @@ export default class SideBarComponent extends Component {
         'Wyoming',
       ],
     }, {
-      propertyName:'topic',
+      propertyName:'issue',
       subOptions: [
         'Bureau of Reclamation',
         'California Water',
@@ -81,7 +81,7 @@ export default class SideBarComponent extends Component {
           'Upper Colorado Basin',
         ],
       }, {
-        propertyName:'topic',
+        propertyName:'issue',
         subOptions: [
           'Bureau of Reclamation',
           'California Water',

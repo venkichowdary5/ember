@@ -8,6 +8,9 @@
   padding: .7em .75em .5em;
   text-transform: uppercase;
 }
+.clear {
+  clear: both;
+}
 
 a, a:link, a:visited {
     color: black;
@@ -19,4 +22,19 @@ a, a:link, a:visited {
 
 a#statement_project{
   color:#213F8C;
+}
+
+.archive-year-option {
+  list-style: none;
+  padding: 0;
+  overflow: hidden;
+}
+.archive-year-option li {
+  float: left;
+}
+.archive-year-option li a {
+  border-right: 1px solid #213F8C;
+  padding-right: 3px;
+  padding-left: 3px;
+  color: #213F8C;
 }

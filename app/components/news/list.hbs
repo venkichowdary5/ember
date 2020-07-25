@@ -1,27 +1,32 @@
 <div class="Main-well">
   <h2 class="h1">{{this.heading}}</h2>
   {{#if this.isViewingArchiveByYear}}
-    <p>
-      <small>
+  <ul class="archive-year-option">
         {{#each this.archiveYearOptions as |year|}}
+        <li>
           <a
             href="javascript:void(0)"
             {{on "click" (fn @setArchiveYear year)}}
           >
             {{year}}
           </a>
+          </li>
         {{/each}}
-      </small>
-    </p>
+  </ul>
   {{/if}}
   <ul class="MediaList">
-    {{#each this.filteredNews as |newsItem|}}
-      <li class="MediaList-item">
-        <News::item
-          @newsItem={{newsItem}}
-          @trimItemBody={{true}}
-        />
-      </li>
-    {{/each}}
+    {{#if this.filteredNews}}
+      {{#each this.filteredNews as |newsItem|}}
+        <li class="MediaList-item">
+          <News::item
+            @newsItem={{newsItem}}
+            @trimItemBody={{true}}
+          />
+        </li>
+      {{/each}}
+    {{else}}
+      <li class="clear">No data Found</li>
+    {{/if}}
+
   </ul>
 </div>

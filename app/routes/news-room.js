@@ -14,7 +14,7 @@ export default class NewsRoomRoute extends Route {
     state: {
 			refreshModel: false,
 		},
-    topic: {
+		issue: {
 			refreshModel: false,
 		},
 	};

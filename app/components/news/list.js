@@ -42,6 +42,19 @@ export default class NewsListComponent extends Component {
     2015,
     2014,
     2013,
+    2012,
+    2011,
+    2010,
+    2009,
+    2008,
+    2007,
+    2006,
+    2005,
+    2004,
+    2003,
+    2002,
+    2001
+
   ];
   
   get filteredNews() {
@@ -85,10 +98,10 @@ export default class NewsListComponent extends Component {
           }
           break;
   
-        case 'topic':
-          if (isPresent(filters.topic)) {
+        case 'issue':
+          if (isPresent(filters.issue)) {
             filteredNews = newsItems.filter(item => {
-              return isPresent(item.field_issue_number) && item.field_issue_number === filters.topic;
+              return isPresent(item.field_issue_number) && item.field_issue_number === filters.issue;
             });
           }
           break;
