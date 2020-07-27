@@ -17,6 +17,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
 		let url = this._buildURL('', id, snapshot, requestType, query);
     let queryParams = snapshot.adapterOptions.query;
     if (queryParams) {
+      debugger
       url += '?format=json&count=10' + `&type=${this.pathForType(modelName)}&` + $.param(queryParams);
     } else {
 			url += '?format=json&count=10' + `&type=${this.pathForType(modelName)}`
