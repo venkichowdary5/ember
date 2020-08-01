@@ -1,6 +1,5 @@
 .LeftNav-title {
-  color:
-    #fff;
+  color:#fff;
   display: block;
   font-size: 13px;
   font-size: 1.3rem;
@@ -37,4 +36,16 @@ a#statement_project{
   padding-right: 3px;
   padding-left: 3px;
   color: #213F8C;
+}
+.list-style-none {
+  list-style: none !important;
+  margin-left: 5px !important;
+}
+.side-bar-sub-nav .container-label {
+  cursor: pointer;
+}
+@media screen and (min-width: 41.25em) {
+  .Main-nav {
+    width: 18em;
+  }
 }
