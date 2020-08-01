@@ -3,23 +3,39 @@
     <span class="LeftNav-title">NEWS & MULTIMEDIA</span>
     <ul class="LeftNav-list">
       {{#each this.sideBarItems as |sideBarItem|}}
-        {{#let (string-contains sideBarItem.routeName this.router.currentRouteName) as |isRouteActive|}}
+        {{#let (eq selectedItem sideBarItem.label) as |isRouteActive|}}
+       
           <li
             class={{if isRouteActive "-active"}}
           >
-            <LinkTo
-              @route={{sideBarItem.routeName}}
-            >
-              {{sideBarItem.label}}
-            </LinkTo>
-
+          {{#if (or (eq sideBarItem.label 'Organization Chart') (eq sideBarItem.label 'Photos') (eq sideBarItem.label 'Multimedia') (eq sideBarItem.label 'Social Media') )}}
+            <a href={{sideBarItem.routeName}} target="_blank">{{sideBarItem.label}}</a>
+            {{else}}
+              {{#if (eq sideBarItem.label 'News Stories')}}
+                  <LinkTo
+                  @route={{sideBarItem.routeName}}
+                  {{on "click" (fn this.setFilter 'field_story' 1 sideBarItem.routeName )}}
+                  {{on "click" (fn this.setCurrentTab sideBarItem.label )}}
+                >
+                  {{sideBarItem.label}}
+                </LinkTo>
+              {{else}}
+                  <LinkTo
+                @route={{sideBarItem.routeName}}
+                {{on "click" (fn this.setFilter 'filterBy' filter.propertyName sideBarItem.routeName )}}
+                {{on "click" (fn this.setCurrentTab sideBarItem.label )}}
+              >
+                {{sideBarItem.label}}
+              </LinkTo>
+              {{/if}}
+            {{/if}}
             {{#if isRouteActive}}
               <ul>
                 {{#each sideBarItem.filters as |filter|}}
                   <li>
                     <a
                       href="javascript:void(0)"
-                      {{on "click" (fn this.setFilter 'filterBy' filter.propertyName)}}
+                      {{on "click" (fn this.setFilter 'filterBy' filter.propertyName sideBarItem.routeName )}}
                     >
                       Filter By 
                       {{#if (equal filter.propertyName 'issue')}}
@@ -31,15 +47,19 @@
                     </a>
 
                     {{#if (equal @queryParams.filterBy filter.propertyName)}}
-                      <ul>
+                      <ul class="side-bar-sub-nav">
                         {{#each filter.subOptions as |subOption|}}
-                          <li>
-                            <a
+                          <li class="list-style-none" >
+                            {{!-- <a
                               href="javascript:void(0)"
-                              {{on "click" (fn this.setFilter filter.propertyName subOption)}}
+                              {{on "click" (fn this.setFilter filter.propertyName subOption sideBarItem.routeName)}}
                             >
                               {{subOption}}
-                            </a>
+                            </a> --}}
+                          <div class="" >
+                            <input type="checkbox" id={{subOption}} name={{subOption}} {{on "click" (fn this.setFilter filter.propertyName subOption sideBarItem.routeName)}} {{on "click" (fn this.toggleFilter )}}>
+                            <label for={{subOption}} > {{subOption}}</label>
+                          </div>
                           </li>
                         {{/each}}
                       </ul>
@@ -49,7 +69,7 @@
                 <li>
                   <a
                     href="javascript:void(0)"
-                    {{on "click" (fn this.goToArchives sideBarItem.routeName)}}
+                    {{on "click" (fn this.setFilter sideBarItem.routeName 'archive' sideBarItem.routeName)}}
                   >
                     Archived {{sideBarItem.label}}
                   </a>

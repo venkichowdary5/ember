@@ -1,11 +1,17 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object'
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class SideBarComponent extends Component {
   @service
   router
-
+  params=[]
+  archiveParams=[]
+  filterState = false
+  filterStateString
+  filterValueReset
+  @tracked selectedItem
   newsReleaseFilterOptions = [
     {
       propertyName:'year',
@@ -106,7 +112,7 @@ export default class SideBarComponent extends Component {
       filters: this.newsReleaseFilterOptions
     }, {
       label: 'News Stories',
-      routeName: 'news-room.stories',
+      routeName: 'news-room.news-releases',
       filters: this.newsStoriesFilterOptions
     }, {
       label: 'Speeches',
@@ -115,15 +121,76 @@ export default class SideBarComponent extends Component {
       label: 'Congressional Testimony',
       routeName: 'news-room.congressional-testimony',
     }
+    , {
+      label: 'Fact Sheet',
+      routeName: 'news-room.fact-sheet',
+    },
+    {
+      label: 'Leadership Bios',
+      routeName: 'news-room.biography',
+    },
+    {
+      label: 'Organization Chart',
+      routeName: '../assets/pdf/br_org_chart.pdf'
+    },
+    {
+      label: 'Photos',
+      routeName: 'https://www.usbr.gov/main/multimedia/index.html#photos'
+    },
+    {
+      label: 'Multimedia',
+      routeName: 'https://www.usbr.gov/main/multimedia/index.html#video'
+    },
+    {
+      label: 'Social Media',
+      routeName: 'https://www.usbr.gov/main/multimedia/index.html#social'
+    }
   ];
 
   @action
-  setFilter(filterName, filterValue) {
-    this.args.setQueryParams(filterName, filterValue);
+  setFilter(filterName, filterValue, routePath ) {
+    this.filterValueReset = filterValue;  
+    if(filterValue == 'archive'){
+      this.archiveParams.filter(item => {
+        this.args.setQueryParams(item, null);
+      });
+       this.router.transitionTo(`${filterName}.archive`);
+    }else {
+      // if(this.filterState && this.filterStateString == 'checked'){
+      //   this.args.setQueryParams(filterName, null);
+      // } else {
+      //   this.params =[];
+      //   this.params.pushObject(filterName);
+      //   this.archiveParams.pushObject(filterName);
+      //   this.router.transitionTo(`${routePath}`);
+      //   this.params.filter(item => {
+      //     this.args.setQueryParams(item, null);
+      //   });
+      //   this.args.setQueryParams(filterName, filterValue);
+      // } 
+        if(!(filterName == 'field_story')){
+          this.args.setQueryParams('field_story', null);
+        }else {
+          this.args.setQueryParams('filterBy', null);
+        }          
+        this.params =[];
+        this.params.pushObject(filterName);
+        this.archiveParams.pushObject(filterName);
+        this.params.filter(item => {
+        this.args.setQueryParams('item', null);
+        });
+        this.router.transitionTo(`${routePath}`);
+        this.args.setQueryParams(filterName, filterValue);
+    }
   }
 
   @action
-  goToArchives(routePath) {
-    this.router.transitionTo(`${routePath}.archive`);
+  toggleFilter(routePath) {
+    this.filterStateString = 'checked'
+    this.filterState = !this.filterState
+  }
+  @action
+  setCurrentTab(selectedItem){
+    this.selectedItem = selectedItem;
   }
 }

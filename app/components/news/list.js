@@ -77,7 +77,7 @@ export default class NewsListComponent extends Component {
         case 'year':
           if (isPresent(filters.year)) {
             filteredNews = newsItems.filter(item => {
-              return isPresent(item.field_date_to_be_published) && moment(item.field_date_to_be_published).format('YYYY') === filters.year;
+              return isPresent(item.field_date_to_be_published) && Number(moment(item.field_date_to_be_published).format('YYYY')) === Number(filters.year);
             });
           }
           break;
@@ -112,7 +112,7 @@ export default class NewsListComponent extends Component {
 
     if (isViewingArchiveByYear && isPresent(archiveYear)) {
       return filteredNews.filter(item => {
-        return isPresent(item.field_date_to_be_published) && moment(item.field_date_to_be_published).format('YYYY') === archiveYear;
+        return isPresent(item.field_date_to_be_published) && Number(moment(item.field_date_to_be_published).format('YYYY')) === Number(archiveYear);
       });
     }
     return filteredNews;

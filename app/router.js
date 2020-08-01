@@ -25,7 +25,19 @@ Router.map(function() {
       this.route('show',{ path: '/:speech_slug' });
       this.route('archive');
     });
+
+    this.route('fact-sheet', function() {
+      //this.route('show',{ path: '/:speech_slug' });
+      this.route('archive');
+    });
+
+    this.route('biography', function() {
+      //this.route('show',{ path: '/:speech_slug' });
+      this.route('archive');
+    });
+
     this.route('page', { path: '/:page_slug' });
     this.route('404');
   });
+  this.route('fact_sheet');
 });

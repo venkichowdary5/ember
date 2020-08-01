@@ -9,6 +9,7 @@ export default class NewsRoomControler extends Controller {
     'region',
     'state',
     'issue',
+    'field_story'
   ];
 
   @tracked filterBy = null;
@@ -16,6 +17,8 @@ export default class NewsRoomControler extends Controller {
   @tracked region = null;
   @tracked state = null;
   @tracked issue = null;
+  @tracked field_story = null;
+
 
   get queryParamValues() {
     let {
@@ -24,6 +27,7 @@ export default class NewsRoomControler extends Controller {
       region,
       state,
       issue,
+      field_story
     } = this;
     return {
       filterBy,
@@ -31,6 +35,7 @@ export default class NewsRoomControler extends Controller {
       region,
       state,
       issue,
+      field_story
     }
   }
 
@@ -71,7 +76,13 @@ export default class NewsRoomControler extends Controller {
         this.region = null;
         this.state = null;
         break;
-
+      case 'field_story':
+        this.field_story = queryParamValue;
+        this.year = null;
+        this.region = null;
+        this.state = null;
+        this.issue = null;
+        break;  
       default:
         break;
     }

@@ -7,7 +7,7 @@ import { isPresent } from '@ember/utils';
 export default class NewsLoaderComponent extends Component {
   @service
   store
-
+  router
   @tracked
   newsItems = []
 
@@ -24,9 +24,18 @@ export default class NewsLoaderComponent extends Component {
 		}
 
 		if (isPresent(filterBy) && isPresent(params[filterBy])) {
+			if(params.field_story){
+				let filter = {
+					[filterBy]: params[filterBy]
+				}
+				return Object.assign({},{field_story:1},filter)
+			}
 			return {
 				[filterBy]: params[filterBy],
 			}
+		}
+		if(params.field_story){
+			return {field_story:1}
 		}
 	}
 
