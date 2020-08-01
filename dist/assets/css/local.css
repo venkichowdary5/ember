@@ -44,6 +44,14 @@ a#statement_project{
 .side-bar-sub-nav .container-label {
   cursor: pointer;
 }
+.loader-icon img {
+  width: 100px;
+  position: absolute;
+  left: 10%;
+  right: 0;
+  top: 50%;
+  margin: 0 auto;
+}
 @media screen and (min-width: 41.25em) {
   .Main-nav {
     width: 18em;

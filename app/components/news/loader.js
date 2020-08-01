@@ -7,9 +7,12 @@ import { isPresent } from '@ember/utils';
 export default class NewsLoaderComponent extends Component {
   @service
   store
+  @service
   router
   @tracked
-  newsItems = []
+  newsItems =[]
+  @tracked
+  loading = false
 
   getApplicableParams(params, archiveYear) {
 		const {
@@ -41,13 +44,18 @@ export default class NewsLoaderComponent extends Component {
 
   @action
   async loader(modelName, queryParams, archiveYear) {
-    const query = this.getApplicableParams(queryParams, archiveYear);
-    let newsItems = await this.store.findAll(modelName, {
+	this.newsItems = [] 
+	const query = this.getApplicableParams(queryParams, archiveYear);
+	this.loading = false;
+	let that = this;
+     this.store.findAll(modelName, {
       adapterOptions: {
         query
       }
-		});
-		
-		this.newsItems = newsItems.toArray();
+		}).then(function(item) {
+			that.loading = true;
+			that.newsItems = item;	
+			
+		  });
   }
 } 

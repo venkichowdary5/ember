@@ -5,7 +5,7 @@ let ENV = {
     modulePrefix: 'ember-drupal',
     environment,
     rootURL: '/front-end/',
-    hostURL: 'http://drupal.batchmasters.com',
+    hostURL: 'http://mvenki.com/Newsdrupal/web',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {

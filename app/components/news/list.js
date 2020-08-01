@@ -4,8 +4,10 @@ import {
   isPresent,
 } from '@ember/utils';
 import moment from 'moment';
-
+import { inject as service } from '@ember/service';
 export default class NewsListComponent extends Component {
+  @service
+  router
   get heading() {
     let { args: { modelName } } = this;
     let heading = '';
@@ -69,9 +71,9 @@ export default class NewsListComponent extends Component {
 
     if (isBlank(newsItems))
       return [];
-
-    let filteredNews = newsItems;
-
+    let filteredNews = [];
+      filteredNews = newsItems;
+    
     if (isPresent(filters) && isPresent(filters.filterBy)) {
       switch(filters.filterBy) {        
         case 'year':

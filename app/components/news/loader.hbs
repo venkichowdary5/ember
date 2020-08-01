@@ -2,11 +2,16 @@
   {{did-insert (fn this.loader @modelName @queryParams @archiveYear)}}
   {{did-update (fn this.loader @modelName @queryParams @archiveYear)}}
 ></div>
-<News::List
-  @newsItems={{this.newsItems}}
-  @filters={{@queryParams}}
-  @trimItemBody={{true}}
-  @modelName={{@modelName}}
-  @setArchiveYear={{@setArchiveYear}}
-  @archiveYear={{@archiveYear}}
-/>
+
+{{#if (and (not this.newsItems) loading)}}
+    <div>No data found</div>
+  {{else}}
+   <News::List
+    @newsItems={{this.newsItems}}
+    @filters={{@queryParams}}
+    @trimItemBody={{true}}
+    @modelName={{@modelName}}
+    @setArchiveYear={{@setArchiveYear}}
+    @archiveYear={{@archiveYear}}
+  />
+ {{/if}} 
