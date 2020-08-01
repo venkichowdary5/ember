@@ -1,5 +1,9 @@
 <p class="h3">
+  {{#if @newsItem.field_date_to_be_published}}
   <small>{{moment-format @newsItem.field_date_to_be_published "ll"}}</small>
+  {{else}}
+   <small>{{moment-format @newsItem.field_date "ll"}}</small>
+  {{/if}}
   <br>
   <a href="newsrelease/detail.cfm?RecordID=71664">
     <b>{{@newsItem.title}}</b>
